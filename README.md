@@ -1,4 +1,4 @@
-# 假设运维已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例)
+# 假设运维已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例
 ## STEP0. Add the user 'privuser' using root account
 ```
 [root@localhost ~]# useradd -r privuser
@@ -47,7 +47,7 @@ Unpacking Nessus Core Components...
 [privuser@localhost ~]$ sudo setcap "cap_net_admin,cap_net_raw,cap_sys_resource+eip" /opt/nessus/sbin/nessusd
 [privuser@localhost ~]$ sudo setcap "cap_net_admin,cap_net_raw,cap_sys_resource+eip" /opt/nessus/sbin/nessus-service
 ```
-## STEP7. Remove and add the following lines to the **/usr/lib/systemd/system/nessusd.service** script:
+## STEP7. Remove and add the following lines in **/usr/lib/systemd/system/nessusd.service**
 * Remove:ExecStart=/opt/nessus/sbin/nessus-service-q
 * Add:ExecStart=/opt/nessus/sbin/nessus-service -q --no-root
 * Add:User=nonprivuser
@@ -86,4 +86,4 @@ Alias=nessusd.service
 [privuser@localhost ~]$ sudo systemctl daemon-reload
 [privuser@localhost ~]$ sudo systemctl start nessusd
 ```
-# End
+## 命令行安装完成！接下来请访问https://<ip>:8834做初始化与激活。
