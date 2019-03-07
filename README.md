@@ -1,19 +1,20 @@
-#假设运维已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例)
-##0. Add the user 'privuser' using root account
+# 假设运维已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例)
+## STEP0. Add the user 'privuser' using root account
 ```
 [root@localhost ~]# useradd -r privuser
 [root@localhost ~]# passwd username
 [root@localhost ~]# usermod -aG wheel privuser
 ```
-##1. SSH login with 'privuser'
-```Shawns-MacBook-Pro:~ xxu$ ssh privuser@172.16.221.154
+## STEP1. SSH login with 'privuser'
+```
+Shawns-MacBook-Pro:~ xxu$ ssh privuser@172.16.221.154
 privuser@172.16.221.154's password:
 Last failed login: Mon Mar  4 21:10:06 CST 2019 from 172.16.221.1 on ssh:notty
 There was 1 failed login attempt since the last successful login.
 Last login: Mon Mar  4 21:07:47 2019 from 172.16.221.1
 -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
 ```
-##2. Install Nessus by using su + sudo
+## STEP2. Install Nessus by using su + sudo
 ```
 [privuser@localhost ~]$ su - privuser
 Password:
@@ -29,24 +30,24 @@ Unpacking Nessus Core Components...
  - You can start Nessus by typing /bin/systemctl start nessusd.service
  - Then go to https://localhost.localdomain:8834/ to configure your scanner
 ```
-##3. add the user 'nonprivuser' using 'privser'
+## STEP3. add the user 'nonprivuser' using 'privser'
 ```
 [privuser@localhost ~]$ sudo useradd -r nonprivuser
 ```
-##4. Remove 'world' permissions on Nessus binaries in the /sbin directory.
+## STEP4. Remove 'world' permissions on Nessus binaries in the /sbin directory.
 ```
 [privuser@localhost ~]$ sudo chmod 750 /opt/nessus/sbin/*
 ```
-##5. Change ownership of /opt/nessus to the non-root user.
+## STEP5. Change ownership of /opt/nessus to the non-root user.
 ```
 [privuser@localhost ~]$ sudo chown nonprivuser:nonprivuser -R /opt/nessus
 ```
-##6. Set capabilities on nessusd and nessus-service.
+## STEP6. Set capabilities on nessusd and nessus-service.
 ```
 [privuser@localhost ~]$ sudo setcap "cap_net_admin,cap_net_raw,cap_sys_resource+eip" /opt/nessus/sbin/nessusd
 [privuser@localhost ~]$ sudo setcap "cap_net_admin,cap_net_raw,cap_sys_resource+eip" /opt/nessus/sbin/nessus-service
 ```
-##7. Remove and add the following lines to the **/usr/lib/systemd/system/nessusd.service** script:
+## STEP7. Remove and add the following lines to the **/usr/lib/systemd/system/nessusd.service** script:
 * Remove:ExecStart=/opt/nessus/sbin/nessus-service-q
 * Add:ExecStart=/opt/nessus/sbin/nessus-service -q --no-root
 * Add:User=nonprivuser
@@ -80,9 +81,9 @@ User=nonprivuser
 WantedBy=multi-user.target
 Alias=nessusd.service
 ```
-##8. Reload nessusd.
+## STEP8. Reload nessusd.
 ```
 [privuser@localhost ~]$ sudo systemctl daemon-reload
 [privuser@localhost ~]$ sudo systemctl start nessusd
 ```
-#End
+# End
