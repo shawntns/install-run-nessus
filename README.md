@@ -86,4 +86,6 @@ Alias=nessusd.service
 [privuser@localhost ~]$ sudo systemctl daemon-reload
 [privuser@localhost ~]$ sudo systemctl start nessusd
 ```
-## 命令行安装完成！接下来请访问https://<ip>:8834做初始化与激活。
+## SETP9. 命令行安装完成！接下来请访问https://<ip>:8834做初始化与激活。
+## Nessus服务启动后，top查看运行进程并确认nessusd已使用nonprivuser运行。
+![nessusd running as nonprivuser](https://github.com/shawntns/install-run-nessus/blob/master/nessusd.jpeg)
