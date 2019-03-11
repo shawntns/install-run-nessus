@@ -2,7 +2,7 @@
 # 需求介绍
 测试用到3个账户：
 
-**root:**假设该账户是sec team拿不到的，仅掌握在ops team手中
+**root:** 假设该账户是sec team拿不到的，仅掌握在ops team手中
 
 **privuser:** 该是安装Nessus所用到的，由ops创建并交给sec使用
 
