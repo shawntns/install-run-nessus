@@ -1,15 +1,17 @@
 
-# 环境介绍
+# 需求介绍
 测试用到3个账户：
 
-**root**——假设该账户是sec team拿不到的，仅掌握在ops team手中\r\n
-**privuser**——该是安装Nessus所用到的，由ops创建并交给sec使用
+**root:**假设该账户是sec team拿不到的，仅掌握在ops team手中
 
-**nonprivuser**——这个账号是由privuser生成的。目的是让Nessus能跑起来并扫描
+**privuser:** 该是安装Nessus所用到的，由ops创建并交给sec使用
+
+   **假设运维团队已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例**
+
+**nonprivuser:** 这个账号是由privuser生成的。目的是让Nessus能跑起来并扫描
 
 目前使用privuser安装，然后用nonprivuser运行Nessus，测试成功。
 
-# 假设运维团队已创建了账户privuser，该账户可以使用su+sudo，方法参考步骤0为例
 
 ## STEP0. Add the user 'privuser' using root account
 ```
