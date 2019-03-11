@@ -2,8 +2,7 @@
 # 环境介绍
 测试用到3个账户：
 
-**root**——假设该账户是sec team拿不到的，仅掌握在ops team手中
-
+**root**——假设该账户是sec team拿不到的，仅掌握在ops team手中\n
 **privuser**——该是安装Nessus所用到的，由ops创建并交给sec使用
 
 **nonprivuser**——这个账号是由privuser生成的。目的是让Nessus能跑起来并扫描
